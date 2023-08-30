@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-public class HitClient extends BaseClient{
+public class HitClient extends BaseClient {
     private static final String API_PREFIX = "/hit";
 
     public HitClient(@Value("${stats-server.url}") String serverUrl, RestTemplateBuilder builder) {
