@@ -23,6 +23,6 @@ public class EndpointHitDto {
     @NotBlank(message = "Отсутсвует ip.")
     private String ip;
     @NotNull(message = "Отсутствует время.")
-    @JsonFormat(pattern = DateTimePattern.DTPATTERN)
+    @JsonFormat(pattern = DateTimePattern.PATTERN)
     private LocalDateTime timestamp;
 }
