@@ -6,7 +6,7 @@ import ru.practicum.entity.ViewStats;
 
 @UtilityClass
 public final class ViewStatsMapper {
-    public static ViewStats toViewStats(ViewStatsDto viewStatsDto) {
+    public ViewStats toViewStats(ViewStatsDto viewStatsDto) {
         return ViewStats.builder()
                 .app(viewStatsDto.getApp())
                 .uri(viewStatsDto.getUri())
@@ -14,7 +14,7 @@ public final class ViewStatsMapper {
                 .build();
     }
 
-    public static ViewStatsDto toViewStatsDto(ViewStats viewStats) {
+    public ViewStatsDto toViewStatsDto(ViewStats viewStats) {
         return ViewStatsDto.builder()
                 .app(viewStats.getApp())
                 .uri(viewStats.getUri())

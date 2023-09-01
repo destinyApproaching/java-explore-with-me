@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.practicum.pattern.DateTimePattern;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,6 @@ public class EndpointHitDto {
     @NotBlank(message = "Отсутсвует ip.")
     private String ip;
     @NotNull(message = "Отсутствует время.")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DateTimePattern.PATTERN)
     private LocalDateTime timestamp;
 }

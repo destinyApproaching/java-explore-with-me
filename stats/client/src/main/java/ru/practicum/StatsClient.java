@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class StatsClient extends BaseClient {
@@ -20,11 +21,11 @@ public class StatsClient extends BaseClient {
         );
     }
 
-    public ResponseEntity<Object> getStats(String start, String end, String[] uris, Boolean unique) {
+    public ResponseEntity<Object> getStats(LocalDateTime start, LocalDateTime end, String[] uris, Boolean unique) {
         Map<String, Object> parameters = Map.of(
                 "start", start,
                 "end", end,
-                "uris", uris,
+                "uris", String.join(",", uris),
                 "unique", unique
         );
         return get("?start={start}&end={end}&uris={uris}&unique={unique}", parameters);
