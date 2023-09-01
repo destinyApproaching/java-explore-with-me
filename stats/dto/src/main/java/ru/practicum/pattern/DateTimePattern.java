@@ -4,5 +4,5 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class DateTimePattern {
-    public final String PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public final String DTPATTERN = "yyyy-MM-dd HH:mm:ss";
 }

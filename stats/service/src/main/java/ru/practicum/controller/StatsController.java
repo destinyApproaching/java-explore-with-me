@@ -23,8 +23,8 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public List<ViewStatsDto> getStats(@RequestParam("start") @DateTimeFormat(pattern = DateTimePattern.PATTERN) LocalDateTime start,
-                                       @RequestParam("end") @DateTimeFormat(pattern = DateTimePattern.PATTERN) LocalDateTime end,
+    public List<ViewStatsDto> getStats(@RequestParam("start") @DateTimeFormat(pattern = DateTimePattern.DTPATTERN) LocalDateTime start,
+                                       @RequestParam("end") @DateTimeFormat(pattern = DateTimePattern.DTPATTERN) LocalDateTime end,
                                        @RequestParam(required = false) List<String> uris,
                                        @RequestParam(defaultValue = "false") Boolean unique) {
         return statsService.getStats(start, end, uris, unique);
