@@ -23,7 +23,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public Map<String, String> ConflictException(ConflictException e) {
+    public Map<String, String> conflictException(ConflictException e) {
         return Map.of("error", e.getMessage());
     }
 }
