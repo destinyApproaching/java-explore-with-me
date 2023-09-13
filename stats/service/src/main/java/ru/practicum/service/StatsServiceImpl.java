@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.EndpointHitDto;
 import ru.practicum.ViewStatsDto;
+import ru.practicum.exception.BadRequestException;
 import ru.practicum.mapper.EndpointHitMapper;
 import ru.practicum.mapper.ViewStatsMapper;
 import ru.practicum.repository.StatsRepository;
@@ -18,7 +19,7 @@ public class StatsServiceImpl implements StatsService {
     private final StatsRepository statsRepository;
 
     @Override
-    public EndpointHitDto saveHit(EndpointHitDto endpointHitDto) {
+    public EndpointHitDto postHit(EndpointHitDto endpointHitDto) {
         statsRepository.save(EndpointHitMapper.toEndpointHit(endpointHitDto));
         return endpointHitDto;
     }
@@ -26,7 +27,7 @@ public class StatsServiceImpl implements StatsService {
     @Override
     public List<ViewStatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
         if (start.isAfter(end)) {
-            throw new IllegalArgumentException("Начало не может быть позже конца.");
+            throw new BadRequestException("Начало не может быть позже конца.");
         }
         if (unique) {
             return statsRepository.findUniqueViewStats(start, end, uris)

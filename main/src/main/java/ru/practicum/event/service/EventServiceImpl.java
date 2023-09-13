@@ -71,7 +71,7 @@ public class EventServiceImpl implements EventService {
         } else {
             pageable = PageRequest.of(from == 0 ? 0 : from / size, size);
         }
-//        statsService.hitEvent(null);
+        statsService.hitEvent(null);
         List<Event> events = eventRepository.getAllEventForPub(
                 text != null ? text.toLowerCase() : null,
                 categories,
@@ -99,7 +99,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventFullDto getEventById(Long eventId) {
-//        statsService.postHit(eventId);
+        statsService.hitEvent(eventId);
         EventFullDto eventFullDto = EventMapper
                 .toEventFullDto(eventRepository
                         .getEventByIdForPub(eventId)
