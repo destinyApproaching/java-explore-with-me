@@ -1,33 +1,46 @@
 package ru.practicum;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.util.DefaultUriBuilderFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
-public class StatsClient extends BaseClient {
-    private static final String API_PREFIX = "/stats";
+@Service
+public class StatsClient {
+    private final WebClient webClient;
 
-    public StatsClient(@Value("${stats-server.url}") String serverUrl, RestTemplateBuilder builder) {
-        super(
-                builder
-                        .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl + API_PREFIX))
-                        .requestFactory(HttpComponentsClientHttpRequestFactory::new)
-                        .build()
-        );
+    public StatsClient(@Value("${stats-server.url}") String serverUrl) {
+        webClient = WebClient.builder()
+                .baseUrl(serverUrl)
+                .build();
     }
 
-    public ResponseEntity<Object> getStats(LocalDateTime start, LocalDateTime end, String[] uris, Boolean unique) {
-        Map<String, Object> parameters = Map.of(
-                "start", start,
-                "end", end,
-                "uris", String.join(",", uris),
-                "unique", unique
-        );
-        return get("?start={start}&end={end}&uris={uris}&unique={unique}", parameters);
+    public ResponseEntity<List<ViewStatsDto>> getStat(String start, String end, List<String> uris, boolean unique) {
+        return webClient.get()
+                .uri(UriComponentsBuilder
+                        .fromUriString("/stats")
+                        .queryParam("start", start)
+                        .queryParam("end", end)
+                        .queryParam("uris", uris)
+                        .queryParam("unique", unique)
+                        .build().toUriString())
+                .retrieve()
+                .toEntityList(ViewStatsDto.class)
+                .block();
+    }
+
+    public ResponseEntity<EndpointHitDto> hitStat(EndpointHitDto endpointHitDto) {
+        return webClient.post()
+                .uri("/hit")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(endpointHitDto))
+                .retrieve()
+                .toEntity(EndpointHitDto.class)
+                .block();
     }
 }
