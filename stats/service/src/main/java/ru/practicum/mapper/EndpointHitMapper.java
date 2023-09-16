@@ -14,13 +14,4 @@ public final class EndpointHitMapper {
                 .timestamp(endpointHitDto.getTimestamp())
                 .build();
     }
-
-    public EndpointHitDto toEndpointHitDto(EndpointHit endpointHit) {
-        return EndpointHitDto.builder()
-                .app(endpointHit.getApp())
-                .uri(endpointHit.getUri())
-                .ip(endpointHit.getIp())
-                .timestamp(endpointHit.getTimestamp())
-                .build();
-    }
 }

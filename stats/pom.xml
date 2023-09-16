@@ -34,11 +34,6 @@
                 <artifactId>jackson-annotations</artifactId>
                 <version>${com.fasterxml.jackson.core.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${org.postgresql.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

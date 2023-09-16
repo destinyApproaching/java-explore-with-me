@@ -16,13 +16,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EndpointHitDto {
-    @NotBlank(message = "Отсутсвует app.")
+    @NotBlank
     private String app;
-    @NotBlank(message = "Отсутствует uri.")
+    @NotBlank
     private String uri;
-    @NotBlank(message = "Отсутсвует ip.")
+    @NotBlank
     private String ip;
-    @NotNull(message = "Отсутствует время.")
-    @JsonFormat(pattern = DateTimePattern.PATTERN)
-    private LocalDateTime timestamp;
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimePattern.PATTERN)
+    @Builder.Default()
+    private LocalDateTime timestamp = LocalDateTime.now();
 }
