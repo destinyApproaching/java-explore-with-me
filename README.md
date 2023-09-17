@@ -1,3 +1,4 @@
 # java-explore-with-me
 Template repository for ExploreWithMe project.
-https://github.com/destinyApproaching/java-explore-with-me/pull/6
+
+[Pull request](https://github.com/destinyApproaching/java-explore-with-me/pull/6)
